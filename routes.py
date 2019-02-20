@@ -2,7 +2,13 @@ from flask import Flask, render_template, request
 from models import db, User
 from forms import SignupForm
 
+import sys
+import logging
 app = Flask(__name__)
+
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
+#app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://localhost/learningflask'
 db.init_app(app)
